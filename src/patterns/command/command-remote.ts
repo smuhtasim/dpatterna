@@ -25,28 +25,30 @@ export class Invoker {
 
 }
 
+export abstract class Light {
+
+    public abstract lightOn(): string 
+        
+    public lightOff(): string {
+        return "off"
+    }
+} 
 
 
-export class NormalLight {
+export class NormalLight extends Light{
 
     public lightOn(): string {
         return 'on'
     }
 
-    public lightOff(): string {
-        return 'off'
-    }
 }
 
-export class RedLight {
+export class RedLight extends Light{
 
     public lightOn(): string {
         return `red0`
     }
 
-    public lightOff(): string {
-        return "off"
-    }
 
     public increaseLuminosity(): string {
         if(brightness < 3)
@@ -102,7 +104,7 @@ export class LightOffCommand implements ICommand {
 
 }
 
-export class RedLightOn implements ICommand {
+export class RedLightOnCommand implements ICommand {
     
     private light: RedLight;
 
@@ -120,7 +122,7 @@ export class RedLightOn implements ICommand {
 
 }
 
-export class RedLightIncreaseLuminosity implements ICommand {
+export class RedLightIncreaseLuminosityCommand implements ICommand {
     private light: RedLight;
 
     constructor(light: RedLight) {
@@ -137,7 +139,7 @@ export class RedLightIncreaseLuminosity implements ICommand {
 
 }
 
-export class RedLightDecreaseLuminosity implements ICommand {
+export class RedLightDecreaseLuminosityCommand implements ICommand {
     private light: RedLight;
 
     constructor(light: RedLight) {
@@ -155,7 +157,7 @@ export class RedLightDecreaseLuminosity implements ICommand {
 }
 
 
-export class RedLightOff implements ICommand {
+export class RedLightOffCommand implements ICommand {
     private light: RedLight;
 
     constructor(_light: RedLight) {

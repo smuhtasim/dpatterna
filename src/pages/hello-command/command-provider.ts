@@ -5,10 +5,10 @@ import {
     RedLight,
     LightOnCommand,
     LightOffCommand,   
-    RedLightOn,
-    RedLightIncreaseLuminosity,
-    RedLightDecreaseLuminosity,
-    RedLightOff   
+    RedLightOnCommand,
+    RedLightIncreaseLuminosityCommand,
+    RedLightDecreaseLuminosityCommand,
+    RedLightOffCommand   
 } from "../../patterns/command/command-remote";
 
 let isRedLightOn: boolean = false
@@ -23,20 +23,21 @@ export function commandHandler(command: string): string {
 
             result = commandOnLight(new LightOnCommand(new NormalLight()))
             isNormalLightOn = true
+            isRedLightOn = false
             break;
 
         case "off":
         
             result = commandOnLight(new LightOffCommand(new NormalLight()))
             isNormalLightOn = false
-            
+            isRedLightOn = false
             break
 
         case "increase":
             
             if(isRedLightOn)
             {
-                result = commandOnLight(new RedLightIncreaseLuminosity(new RedLight()))
+                result = commandOnLight(new RedLightIncreaseLuminosityCommand(new RedLight()))
             }
             break
 
@@ -44,7 +45,7 @@ export function commandHandler(command: string): string {
           
             if(isRedLightOn)
             {
-                result = commandOnLight(new RedLightDecreaseLuminosity(new RedLight()))
+                result = commandOnLight(new RedLightDecreaseLuminosityCommand(new RedLight()))
             }
             break
 
@@ -52,7 +53,7 @@ export function commandHandler(command: string): string {
  
             if(isNormalLightOn)
             {
-                result = commandOnLight(new RedLightOn(new RedLight()))
+                result = commandOnLight(new RedLightOnCommand(new RedLight()))
                 isRedLightOn = true
             }           
             break
