@@ -11,7 +11,7 @@ import {
     RedLightOffCommand   
 } from "../../patterns/command/command-remote";
 
-let isRedLightOn: boolean = false
+let isRedLightOn: boolean = false                   // in default state the light is turned off
 let isNormalLightOn: boolean = false
 let result: string;
 
@@ -22,7 +22,7 @@ export function commandHandler(command: string): string {
         case "on":
 
             result = commandOnLight(new LightOnCommand(new NormalLight()))
-            isNormalLightOn = true
+            isNormalLightOn = true                  // even though the light is turned off but it is not red
             isRedLightOn = false
             break;
 
@@ -35,7 +35,7 @@ export function commandHandler(command: string): string {
 
         case "increase":
             
-            if(isRedLightOn)
+            if(isRedLightOn)                // if the light is in red state only then it will increase its luminosity
             {
                 result = commandOnLight(new RedLightIncreaseLuminosityCommand(new RedLight()))
             }
@@ -43,7 +43,7 @@ export function commandHandler(command: string): string {
 
         case "decrease":
           
-            if(isRedLightOn)
+            if(isRedLightOn)                // if the light is in red state only then it will decrease its luminosity
             {
                 result = commandOnLight(new RedLightDecreaseLuminosityCommand(new RedLight()))
             }

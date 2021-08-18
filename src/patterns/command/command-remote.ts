@@ -15,11 +15,11 @@ export class Invoker {
     }
 
     setCommand(onCommand: ICommand) {
-        this.command = onCommand;
+        this.command = onCommand;           // Which command needs to executed on the light.
     }
 
     executeCommand() {
-        return this.command.execute()
+        return this.command.execute()       // Executes the command that has been previously set
     }
 
 
@@ -29,7 +29,7 @@ export abstract class Light {
 
     public abstract lightOn(): string 
         
-    public lightOff(): string {
+    public lightOff(): string {             // it will turn off the light regardless the current state of light
         return "off"
     }
 } 
@@ -46,24 +46,24 @@ export class NormalLight extends Light{
 export class RedLight extends Light{
 
     public lightOn(): string {
-        return `red0`
+        return `red0`                   //When turning on the red light will be in the state of lowest brightness 
     }
 
 
     public increaseLuminosity(): string {
-        if(brightness < 3)
+        if(brightness < 3)              // Taking 3 as the highest brightness
         {
             brightness++;
         }
-        return `red${brightness}`
+        return `red${brightness}`       // To indicate brightness of red light and it will display red/${brightness}.png accordingly
     }
 
     public decreaseLuminosity(): string {
-        if(brightness > 0)
+        if(brightness > 0)              // Taking 0 as the lowest brightness
         {
             brightness--;
         }
-        return `red${brightness}`
+        return `red${brightness}`       // To indicate brightness of red light and it will display red/${luminosity}.png accordingly
 
     }
 }
